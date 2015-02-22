@@ -21,6 +21,7 @@ class GildedRose
 
         return
       when 'Sulfuras, Hand of Ragnaros'
+        return
       when 'Backstage passes to a TAFKAL80ETC concert'
       when 'Conjured Mana Cake'
       else
