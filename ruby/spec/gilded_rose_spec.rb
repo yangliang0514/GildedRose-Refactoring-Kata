@@ -32,8 +32,9 @@ describe GildedRose do
         items = [item]
         gilded_rose = described_class.new(items)
 
-        n.times do
+        n.times do |i|
           gilded_rose.update_quality
+          expect(item.sell_in).to eq (n - (i + 1))
         end
 
         expect(item.sell_in).to eq 0
@@ -75,8 +76,9 @@ describe GildedRose do
           items = [item]
           gilded_rose = described_class.new(items)
 
-          n.times do
+          n.times do |i|
             gilded_rose.update_quality
+            expect(item.quality).to eq (n - (i + 1))
           end
 
           expect(item.quality).to eq 0
@@ -100,11 +102,12 @@ describe GildedRose do
           items = [item]
           gilded_rose = described_class.new(items)
 
-          n.times do
+          n.times do |i|
             gilded_rose.update_quality
+            expect(item.quality).to eq (quality - (2 * (i+1)))
           end
 
-          expect(item.quality).to eq (quality-(2*n))
+          expect(item.quality).to eq (quality - (2 * n))
         end
       end
     end
@@ -118,8 +121,9 @@ describe GildedRose do
             items = [item]
             gilded_rose = described_class.new(items)
 
-            n.times do
+            n.times do |i|
               gilded_rose.update_quality
+              expect(item.quality).to eq (i + 1)
             end
 
             expect(item.quality).to eq n
@@ -133,11 +137,12 @@ describe GildedRose do
             items = [item]
             gilded_rose = described_class.new(items)
 
-            n.times do
+            n.times do |i|
               gilded_rose.update_quality
+              expect(item.quality).to eq (2 * (i + 1))
             end
 
-            expect(item.quality).to eq 2*n
+            expect(item.quality).to eq (2 * n)
           end
         end
 
@@ -191,8 +196,9 @@ describe GildedRose do
               items = [item]
               gilded_rose = described_class.new(items)
 
-              n.times do
+              n.times do |i|
                 gilded_rose.update_quality
+                expect(item.quality).to eq (quality + i + 1)
               end
 
               expect(item.quality).to eq (quality + n)
@@ -207,11 +213,12 @@ describe GildedRose do
               items = [item]
               gilded_rose = described_class.new(items)
 
-              n.times do
+              n.times do |i|
                 gilded_rose.update_quality
+                expect(item.quality).to eq (quality + 2 * (i + 1))
               end
 
-              expect(item.quality).to eq (quality + 2*n)
+              expect(item.quality).to eq (quality + (2 * n))
             end
           end
 
@@ -223,11 +230,12 @@ describe GildedRose do
               items = [item]
               gilded_rose = described_class.new(items)
 
-              n.times do
+              n.times do |i|
                 gilded_rose.update_quality
+                expect(item.quality).to eq (quality + 3 * (i + 1))
               end
 
-              expect(item.quality).to eq (quality + 3*n)
+              expect(item.quality).to eq (quality + (3 * n))
             end
           end
         end
