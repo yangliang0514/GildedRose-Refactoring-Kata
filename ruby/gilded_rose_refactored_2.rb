@@ -8,49 +8,15 @@ class GildedRose
     @items.each do |item|
       case item.name
       when 'Aged Brie'
-        if item.sell_in > 0
-          quality = item.quality + 1
-        else
-          quality = item.quality + 2
-        end
-
-        item.quality = quality if quality <= 50
-
-        item.sell_in -= 1
-
-        return
+        AgedBrieHandler.new(item).update
       when 'Sulfuras, Hand of Ragnaros'
-        return
+        SulfurasHandler.new(item).update
       when 'Backstage passes to a TAFKAL80ETC concert'
-        if item.sell_in > 10
-          item.quality += 1
-        elsif item.sell_in > 5
-          item.quality += 2
-        elsif item.sell_in > 0
-          item.quality += 3
-        elsif
-          item.quality = 0
-        end
-
-        item.sell_in -= 1
-
-        return
+        BackstagePassesHandler.new(item).update
       when 'Conjured Mana Cake'
-        item.quality -= 2
-        item.sell_in -= 1
-        return
+        ConjuredManaCakeHandler.new(item).update
       else
-        if item.sell_in > 0
-          quality = item.quality - 1
-        else
-          quality = item.quality - 2
-        end
-
-        item.quality = quality if quality >= 0
-
-        item.sell_in -= 1
-
-        return
+        DefaultItemHandler.new(item).update
       end
     end
   end
@@ -67,5 +33,97 @@ class Item
 
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
+  end
+end
+
+class BaseItemHandler
+  attr_reader :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update
+    update_quality
+    update_sell_in
+  end
+
+  private
+
+  def update_quality
+  end
+
+  def update_sell_in
+  end
+end
+
+class DefaultItemHandler < BaseItemHandler
+  private
+
+  def update_quality
+    if item.sell_in > 0
+      quality = item.quality - 1
+    else
+      quality = item.quality - 2
+    end
+
+    item.quality = quality if quality >= 0
+  end
+
+  def update_sell_in
+    item.sell_in -= 1
+  end
+end
+
+class ConjuredManaCakeHandler < BaseItemHandler
+  private
+
+  def update_quality
+    item.quality -= 2
+  end
+
+  def update_sell_in
+    item.sell_in -= 1
+  end
+end
+
+class BackstagePassesHandler < BaseItemHandler
+  private
+
+  def update_quality
+    if item.sell_in > 10
+      item.quality += 1
+    elsif item.sell_in > 5
+      item.quality += 2
+    elsif item.sell_in > 0
+      item.quality += 3
+    elsif
+      item.quality = 0
+    end
+  end
+
+  def update_sell_in
+    item.sell_in -= 1
+  end
+end
+
+class SulfurasHandler < BaseItemHandler
+end
+
+class AgedBrieHandler < BaseItemHandler
+  private
+
+  def update_quality
+    if item.sell_in > 0
+      quality = item.quality + 1
+    else
+      quality = item.quality + 2
+    end
+
+    item.quality = quality if quality <= 50
+  end
+
+  def update_sell_in
+    item.sell_in -= 1
   end
 end
