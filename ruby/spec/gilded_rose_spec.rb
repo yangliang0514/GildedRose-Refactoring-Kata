@@ -253,6 +253,35 @@ describe GildedRose do
       end
     end
 
+    # This is a new feature not yet implemented in GildedRose
+    context 'when item is Conjured Mana Cake' do
+      context 'item quality' do
+        it 'lowers quality value by 2 at the end of the day' do
+          item = Item.new('Conjured Mana Cake', sell_in=1, quality=2)
+          items = [item]
+          gilded_rose = described_class.new(items)
+          gilded_rose.update_quality
+
+          expect(item.quality).to eq 0
+        end
+
+        it 'lowers quality value twice as fast after N days' do
+          n = 5
+          quality = 15
+          item = Item.new('Conjured Mana Cake', sell_in=1, quality=quality)
+          items = [item]
+          gilded_rose = described_class.new(items)
+
+          n.times do |i|
+            gilded_rose.update_quality
+            expect(item.quality).to eq (quality - (2 * (i+1)))
+          end
+
+          expect(item.quality).to eq (quality - (2 * n))
+        end
+      end
+    end
+
   end
 
 end
