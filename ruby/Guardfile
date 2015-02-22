@@ -25,5 +25,5 @@ clearing :on
 
 guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^spec/.+_spec\.rb$})
-  watch('gilded_rose.rb')       { "spec/gilded_rose_spec.rb" }
+  watch(%r{^gilded_rose.*\.rb$}) { "spec/gilded_rose_spec.rb" }
 end
