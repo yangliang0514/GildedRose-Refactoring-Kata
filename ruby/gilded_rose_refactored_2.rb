@@ -6,18 +6,7 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      case item.name
-      when 'Aged Brie'
-        AgedBrieHandler.new(item).update
-      when 'Sulfuras, Hand of Ragnaros'
-        SulfurasHandler.new(item).update
-      when 'Backstage passes to a TAFKAL80ETC concert'
-        BackstagePassesHandler.new(item).update
-      when 'Conjured Mana Cake'
-        ConjuredManaCakeHandler.new(item).update
-      else
-        DefaultItemHandler.new(item).update
-      end
+      ItemMapper.update(item)
     end
   end
 end
@@ -125,5 +114,34 @@ class AgedBrieHandler < BaseItemHandler
 
   def update_sell_in
     item.sell_in -= 1
+  end
+end
+
+class ItemMapper
+  attr_reader :item
+
+  MAP = {
+    'Aged Brie'                                 => AgedBrieHandler,
+    'Sulfuras, Hand of Ragnaros'                => SulfurasHandler,
+    'Backstage passes to a TAFKAL80ETC concert' => BackstagePassesHandler,
+    'Conjured Mana Cake'                        => ConjuredManaCakeHandler,
+  }
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update
+    handler.new(item).update
+  end
+
+  def self.update(item)
+    new(item).update
+  end
+
+  private
+
+  def handler
+    @handler ||= MAP[item.name] || DefaultItemHandler
   end
 end
