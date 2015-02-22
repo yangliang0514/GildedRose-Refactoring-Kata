@@ -9,20 +9,33 @@ class GildedRose
 
       case item.name
       when 'Aged Brie'
-        item.sell_in -= 1
-
-        if item.sell_in < 0
-          quality = item.quality + 2
-        else
+        if item.sell_in > 0
           quality = item.quality + 1
+        else
+          quality = item.quality + 2
         end
 
         item.quality = quality if quality <= 50
+
+        item.sell_in -= 1
 
         return
       when 'Sulfuras, Hand of Ragnaros'
         return
       when 'Backstage passes to a TAFKAL80ETC concert'
+        if item.sell_in > 10
+          item.quality += 1
+        elsif item.sell_in > 5
+          item.quality += 2
+        elsif item.sell_in > 0
+          item.quality += 3
+        elsif
+          item.quality = 0
+        end
+
+        item.sell_in -= 1
+
+        return
       when 'Conjured Mana Cake'
       else
         item.sell_in -= 1
