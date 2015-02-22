@@ -6,7 +6,6 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-
       case item.name
       when 'Aged Brie'
         if item.sell_in > 0
