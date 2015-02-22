@@ -37,6 +37,9 @@ class GildedRose
 
         return
       when 'Conjured Mana Cake'
+        item.quality -= 2
+        item.sell_in -= 1
+        return
       else
         if item.sell_in > 0
           quality = item.quality - 1

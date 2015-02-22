@@ -260,7 +260,7 @@ describe GildedRose do
     end
 
     # This is a new feature not yet implemented in GildedRose
-    context 'when item is Conjured Mana Cake', :skip do
+    context 'when item is Conjured Mana Cake', :xskip do
       it_behaves_like 'default item sell in', 'Conjured Mana Cake'
 
       context 'item quality' do
