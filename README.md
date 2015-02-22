@@ -3,6 +3,7 @@
 * Ruby [see README](ruby)
 
 See also Ruby on Ales 2014 All The Little Things by Sandi Metz
+
 https://www.youtube.com/watch?v=x1wnI0AxpEU
 
 # Text of the kata
