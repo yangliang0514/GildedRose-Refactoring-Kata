@@ -1,3 +1,5 @@
+![Gilded Rose Kata](images/gilded_rose.jpg)
+
 # Solutions
 
 * Ruby [see README](ruby)
