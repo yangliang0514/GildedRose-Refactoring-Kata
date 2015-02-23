@@ -263,6 +263,8 @@ describe GildedRose do
     end
 
     # This is a new feature not yet implemented in GildedRose
+    # use :skip tag to skip those tests
+    # use :xskip or remove tag to run those tests
     context 'when item is Conjured Mana Cake', :xskip do
       it_behaves_like 'default item sell in', 'Conjured Mana Cake'
 
