@@ -42,6 +42,17 @@ describe GildedRose do
       end
     end
 
+    shared_examples 'quality value' do |item_name|
+      it 'quality value is never negative' do
+        item = Item.new(item_name, sell_in=0, quality=0)
+        items = [item]
+        gilded_rose = described_class.new(items)
+        gilded_rose.update_quality
+
+        expect(item.quality).to eq 0
+      end
+    end
+
     context 'item name' do
       it 'does not change the name' do
         item = Item.new('foo', sell_in=0, quality=0)
@@ -56,14 +67,7 @@ describe GildedRose do
     it_behaves_like 'default item sell in', item_name='foo'
 
     context 'item quality' do
-      it 'quality value is never negative' do
-        item = Item.new('foo', sell_in=0, quality=0)
-        items = [item]
-        gilded_rose = described_class.new(items)
-        gilded_rose.update_quality
-
-        expect(item.quality).to eq 0
-      end
+      it_behaves_like 'quality value', item_name='foo'
 
       context 'when sell in date not passed yet' do
         it 'lowers quality value by 1 at the end of the day' do
@@ -121,6 +125,8 @@ describe GildedRose do
       it_behaves_like 'default item sell in', item_name='Aged Brie'
 
       context 'item quality' do
+        it_behaves_like 'quality value', item_name='Aged Brie'
+
         context 'when sell in date not passed yet' do
           it 'increases by 1 the older it gets' do
             n = 5
@@ -181,6 +187,8 @@ describe GildedRose do
       end
 
       context 'item quality' do
+        it_behaves_like 'quality value', item_name='Sulfuras, Hand of Ragnaros'
+
         it 'does not change the quality' do
           item = Item.new('Sulfuras, Hand of Ragnaros', sell_in=0, quality=0)
           items = [item]
@@ -196,6 +204,8 @@ describe GildedRose do
       it_behaves_like 'default item sell in', item_name='Backstage passes to a TAFKAL80ETC concert'
 
       context 'item quality' do
+        it_behaves_like 'quality value', item_name='Backstage passes to a TAFKAL80ETC concert'
+
         context 'when sell in date not passed yet' do
           context 'when sell in above 10 days' do
             it 'increases by 1 the older it gets' do
@@ -269,6 +279,8 @@ describe GildedRose do
       it_behaves_like 'default item sell in', 'Conjured Mana Cake'
 
       context 'item quality' do
+        it_behaves_like 'quality value', item_name='Conjured Mana Cake'
+
         it 'lowers quality value by 2 at the end of the day' do
           item = Item.new('Conjured Mana Cake', sell_in=1, quality=2)
           items = [item]
