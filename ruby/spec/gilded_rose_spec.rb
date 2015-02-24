@@ -134,8 +134,6 @@ describe GildedRose do
       it_behaves_like 'default item sell in', item_name='Aged Brie'
 
       context 'item quality' do
-        it_behaves_like 'quality value', item_name='Aged Brie'
-
         context 'when sell in date not passed yet' do
           it 'increases by 1 the older it gets' do
             n = 5
