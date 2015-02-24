@@ -54,6 +54,15 @@ describe GildedRose do
 
         expect(item.quality).to eq 0
       end
+
+      it 'quality value is never more than 50' do
+        item = Item.new(item_name, sell_in=20, quality=50)
+        items = [item]
+        gilded_rose = described_class.new(items)
+        gilded_rose.update_quality
+
+        expect(item.quality).to be <= 50
+      end
     end
 
     # ######################################################################
