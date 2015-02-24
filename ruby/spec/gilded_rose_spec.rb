@@ -57,7 +57,7 @@ describe GildedRose do
     end
 
     # ######################################################################
-    # Basic tests
+    # Default item
     # ######################################################################
     context 'item name' do
       it 'does not change the name' do
