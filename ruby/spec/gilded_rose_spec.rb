@@ -8,6 +8,9 @@ require File.join(File.dirname(__FILE__) + '/..', 'gilded_rose_refactored_2')
 describe GildedRose do
 
   describe '#update_quality' do
+    # ######################################################################
+    # Shared examples
+    # ######################################################################
     shared_examples 'default item sell in' do |item_name|
       it 'lowers sell in value by 1 at the end of the day' do
         item = Item.new(item_name, sell_in=1, quality=0)
@@ -53,6 +56,9 @@ describe GildedRose do
       end
     end
 
+    # ######################################################################
+    # Basic tests
+    # ######################################################################
     context 'item name' do
       it 'does not change the name' do
         item = Item.new('foo', sell_in=0, quality=0)
@@ -121,6 +127,9 @@ describe GildedRose do
       end
     end
 
+    # ######################################################################
+    # Item: Aged Brie
+    # ######################################################################
     context 'when item is Aged Brie' do
       it_behaves_like 'default item sell in', item_name='Aged Brie'
 
@@ -174,6 +183,9 @@ describe GildedRose do
       end
     end
 
+    # ######################################################################
+    # Sulfuras, Hand of Ragnaros
+    # ######################################################################
     context 'when item is Sulfuras, Hand of Ragnaros' do
       context 'item sell in' do
         it 'does not change the sell in' do
@@ -200,6 +212,9 @@ describe GildedRose do
       end
     end
 
+    # ######################################################################
+    # Backstage passes to a TAFKAL80ETC concert
+    # ######################################################################
     context 'when item is Backstage passes to a TAFKAL80ETC concert' do
       it_behaves_like 'default item sell in', item_name='Backstage passes to a TAFKAL80ETC concert'
 
@@ -272,6 +287,10 @@ describe GildedRose do
       end
     end
 
+    # ######################################################################
+    # Conjured Mana Cake
+    # ######################################################################
+    #
     # This is a new feature not yet implemented in GildedRose
     # use :skip tag to skip those tests
     # use :xskip or remove tag to run those tests
