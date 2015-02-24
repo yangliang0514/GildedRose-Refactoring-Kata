@@ -17,10 +17,8 @@ class GildedRose
         item.quality = quality if quality <= 50
 
         item.sell_in -= 1
-
-        return
       when 'Sulfuras, Hand of Ragnaros'
-        return
+        # nothing
       when 'Backstage passes to a TAFKAL80ETC concert'
         quality = if item.sell_in > 10
                     item.quality + 1
@@ -36,13 +34,10 @@ class GildedRose
         item.quality = 50 if quality > 50
 
         item.sell_in -= 1
-
-        return
       when 'Conjured Mana Cake'
         quality = item.quality - 2
         item.quality = quality if quality >= 0
         item.sell_in -= 1
-        return
       else
         if item.sell_in > 0
           quality = item.quality - 1
@@ -53,8 +48,6 @@ class GildedRose
         item.quality = quality if quality >= 0
 
         item.sell_in -= 1
-
-        return
       end
     end
   end
