@@ -244,6 +244,24 @@ describe GildedRose do
 
               expect(item.quality).to eq (quality + n)
             end
+
+            it 'increases to 50 when sell_in above 10 and quality is 49' do
+              item = Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in=15, quality=49)
+              items = [item]
+              gilded_rose = described_class.new(items)
+              gilded_rose.update_quality
+
+              expect(item.quality).to eq 50
+            end
+
+            it 'increases to 50 instead of 51 when sell_in at least 5 and quality is 49' do
+              item = Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in=5, quality=49)
+              items = [item]
+              gilded_rose = described_class.new(items)
+              gilded_rose.update_quality
+
+              expect(item.quality).to eq 50
+            end
           end
 
           context 'when sell in 10 days or less and above 5 days' do
@@ -261,6 +279,15 @@ describe GildedRose do
 
               expect(item.quality).to eq (quality + (2 * n))
             end
+
+            it 'increases to 50 instead of 52 when sell_in at least 1 and quality is 49' do
+              item = Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in=1, quality=49)
+              items = [item]
+              gilded_rose = described_class.new(items)
+              gilded_rose.update_quality
+
+              expect(item.quality).to eq 50
+            end
           end
 
           context 'when sell in 5 days or less' do
@@ -277,6 +304,15 @@ describe GildedRose do
               end
 
               expect(item.quality).to eq (quality + (3 * n))
+            end
+
+            it 'increases to 50 instead of 52 when sell_in at least 1 and quality is 49' do
+              item = Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in=1, quality=49)
+              items = [item]
+              gilded_rose = described_class.new(items)
+              gilded_rose.update_quality
+
+              expect(item.quality).to eq 50
             end
           end
         end
