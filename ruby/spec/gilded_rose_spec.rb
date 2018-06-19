@@ -337,44 +337,50 @@ describe GildedRose do
     # This is a new feature not yet implemented in GildedRose
     # use :skip tag to skip those tests
     # use :xskip or remove tag to run those tests
-    context 'when item is Conjured Mana Cake', :skip do
-      it_behaves_like 'default item sell in', 'Conjured Mana Cake'
+    #
+    # For now this code is commented out because seeing a lot of yellow warnings
+    # might be annoying while refactoring and being focused on other tests.
+    # Please uncomment this section when you will start work on implementation
+    # for those tests.
+    #
+    #context 'when item is Conjured Mana Cake', :skip do
+      #it_behaves_like 'default item sell in', 'Conjured Mana Cake'
 
-      context 'item quality' do
-        it_behaves_like 'quality value', item_name='Conjured Mana Cake'
+      #context 'item quality' do
+        #it_behaves_like 'quality value', item_name='Conjured Mana Cake'
 
-        it 'lowers quality value by 2 at the end of the day' do
-          item = Item.new('Conjured Mana Cake', sell_in=1, quality=2)
-          items = [item]
-          gilded_rose = described_class.new(items)
-          gilded_rose.update_quality
+        #it 'lowers quality value by 2 at the end of the day' do
+          #item = Item.new('Conjured Mana Cake', sell_in=1, quality=2)
+          #items = [item]
+          #gilded_rose = described_class.new(items)
+          #gilded_rose.update_quality
 
-          expect(item.quality).to eq 0
-        end
+          #expect(item.quality).to eq 0
+        #end
 
-        it 'lowers quality value twice as fast after N days' do
-          quality = 15
-          item = Item.new('Conjured Mana Cake', sell_in=1, quality=quality)
-          items = [item]
-          gilded_rose = described_class.new(items)
+        #it 'lowers quality value twice as fast after N days' do
+          #quality = 15
+          #item = Item.new('Conjured Mana Cake', sell_in=1, quality=quality)
+          #items = [item]
+          #gilded_rose = described_class.new(items)
 
-          gilded_rose.update_quality
-          expect(item.quality).to eq (13)
+          #gilded_rose.update_quality
+          #expect(item.quality).to eq (13)
 
-          gilded_rose.update_quality
-          expect(item.quality).to eq (9)
+          #gilded_rose.update_quality
+          #expect(item.quality).to eq (9)
 
-          gilded_rose.update_quality
-          expect(item.quality).to eq (5)
+          #gilded_rose.update_quality
+          #expect(item.quality).to eq (5)
 
-          gilded_rose.update_quality
-          expect(item.quality).to eq (1)
+          #gilded_rose.update_quality
+          #expect(item.quality).to eq (1)
 
-          gilded_rose.update_quality
-          expect(item.quality).to eq (0)
-        end
-      end
-    end
+          #gilded_rose.update_quality
+          #expect(item.quality).to eq (0)
+        #end
+      #end
+    #end
 
   end
 
