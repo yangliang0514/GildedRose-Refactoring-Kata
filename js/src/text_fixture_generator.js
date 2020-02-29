@@ -12,9 +12,10 @@ itemList.push(new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49));
 // this conjured item does not work properly yet
 // items.push(new Item('Conjured Mana Cake', 3, 6));
 
-function generate_fixtures(days, items) {
+function generate_fixtures(lines, days, items) {
   for(var day = 0; day <= days; day++) {
-    lines.push('-------- day ' + day + ' --------')
+    lines.push(`-------- day ${day} --------`);
+    lines.push('name, sellIn, quality');
 
     for(var i = 0; i < itemList.length; i++) {
       var item = items[i];

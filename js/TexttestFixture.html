@@ -14,8 +14,9 @@
     $('body').append('<p>OMGHAI!</p>');
 
     var days = 2;
+    var items = [...itemList];
 
-    generate_fixtures(days, itemList);
+    generate_fixtures(lines, days, items);
     for (var i = 0; i < lines.length; i++) {
       $('body').append('<p>' + lines[i] + '</p>')
     };
